@@ -8,14 +8,14 @@ export const hashPassword = async (password) => {
   try {
     return await bcrypt.hash(password, 10);
   } catch (e) {
-    logger.error('Error hashing the pasword: $(e)');
+    logger.error(`Error hashing the password: ${e}`);
     throw new Error('Error hashing');
   }
 };
 
-export const creatUser = async ({name, email, password, role = 'user'}) => {
+export const createUser = async ({name, email, password, role = 'user'}) => {
   try {
-    const existingUser = db.select().from(users).where(eq(users.email, email)).limit(1);
+    const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
     if(existingUser.length > 0) throw new Error('User with this email already exists');
 
     const password_hash = await hashPassword(password);
@@ -33,7 +33,7 @@ export const creatUser = async ({name, email, password, role = 'user'}) => {
     logger.info('User ${newUser.email} created successfully');
     return newUser;
   } catch (e) {
-    logger.error('Error creating user: $(e)');
+    logger.error(`Error creating user: ${e}`);
     throw e;
   }
 };

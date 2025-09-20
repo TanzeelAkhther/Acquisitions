@@ -1,10 +1,9 @@
 import logger from '#config/logger.js';
 import { formatValidationError } from '#utils/format.js';
 import { signupSchema } from '#validations/auth.validations.js';
-import cookies from '#utils/cookies.js';
-import jwttoken from '#utils/jwt.js';
+import { cookies } from '#utils/cookies.js';
+import { jwttoken } from '#utils/jwt.js';
 import { createUser } from '#services/auth.service.js';
-import { password } from '#services/auth.service.js';
 
 export const signup = async (req, res, next) => {
   try {
@@ -16,7 +15,7 @@ export const signup = async (req, res, next) => {
         details: formatValidationError(ValidationResult.error)
       });
     }
-    const { name, email, role} = ValidationResult.data;
+    const { name, email, password, role} = ValidationResult.data;
 
     //AUTH Service
     const user = await createUser({name, email, password, role});
