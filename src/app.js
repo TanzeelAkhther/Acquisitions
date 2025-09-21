@@ -5,7 +5,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import authRoutes from '#routes/auth.routes.js'; // Import authentication routes
+import authRoutes from '#routes/auth.routes.js';
+import securtiyMiddleware from '@middleware/security.middleware.js' // Import authentication routes
 
 const app = express(); // Create an Express application
 app.use(helmet()); // Use Helmet to enhance API security and it will be considered a middleware
@@ -15,6 +16,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
 app.use(morgan('combined',{ stream: { write: (message) => logger.info(message.trim()) } }));
+
+app.user(securityMiddleware);
 
 app.get('/', (req, res) => {
   logger.info('Hello from Acquisitions!');
