@@ -60,7 +60,7 @@ export const authenticateUser = async ({email, password}) => {
     }
 
     // Return user without password field
-    const { password, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = user;
     logger.info(`User ${user.email} authenticated successfully`);
     return userWithoutPassword;
   } catch (e) {
