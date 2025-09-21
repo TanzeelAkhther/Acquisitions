@@ -9,6 +9,8 @@ import authRoutes from '#routes/auth.routes.js';
 import securityMiddleware from '#middleware/security.middleware.js'; // Import security middleware
 
 const app = express(); // Create an Express application
+// Ensure correct client IP when behind proxies (needed for accurate rate limiting)
+app.set('trust proxy', 1);
 app.use(helmet()); // Use Helmet to enhance API security and it will be considered a middleware
 app.use(cors());
 app.use(express.json());

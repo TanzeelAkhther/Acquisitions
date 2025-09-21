@@ -74,9 +74,12 @@ const securityMiddleware = async (req, res, next) => {
         path: req.path,
       });
 
+      // Standard rate limiting response: 429 Too Many Requests
+      // Retry-After is set to 60 seconds to match the 1 minute window
+      res.set('Retry-After', '60');
       return res
-        .status(403)
-        .json({ error: 'Forbidden', message: 'Too many requests' });
+        .status(429)
+        .json({ error: 'Too Many Requests', message: 'Too many requests' });
     }
 
     next();
