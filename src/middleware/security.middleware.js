@@ -4,6 +4,8 @@ import { slidingWindow } from '@arcjet/node';
 
 const securityMiddleware = async (req, res, next) => {
   try {
+    // For now, we'll use IP-based rate limiting since req.user might not be available
+    // You can modify this later when you have authentication middleware
     const role = req.user?.role || 'guest';
 
     let limit;
@@ -17,6 +19,9 @@ const securityMiddleware = async (req, res, next) => {
         break;
       case 'guest':
         limit = 5;
+        break;
+      default:
+        limit = 5; // Default to guest limit
         break;
     }
 
@@ -80,7 +85,7 @@ const securityMiddleware = async (req, res, next) => {
     res
       .status(500)
       .json({
-        errro: 'Internal server error',
+        error: 'Internal server error',
         message: 'Something went wrong with security middleware',
       });
   }

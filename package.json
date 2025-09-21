@@ -9,7 +9,7 @@
     "#routes/*": "./src/routes/*",
     "#services/*": "./src/services/*",
     "#controllers/*": "./src/controllers/*",
-    "#middlewares/*": "./src/middlewares/*",
+    "#middleware/*": "./src/middleware/*",
     "#utils/*": "./src/utils/*",
     "#validations/*": "./src/validations/*"
   },
