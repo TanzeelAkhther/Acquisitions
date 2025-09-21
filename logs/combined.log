@@ -45,3 +45,15 @@
 {"level":"info","message":"User ${newUser.email} created successfully","service":"acquisitions-api"}
 {"level":"info","message":"User registered successfully: tanzeelwrk@new.com","service":"acquisitions-api"}
 {"level":"info","message":"::1 - - [20/Sep/2025:12:29:19 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 105 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"Error authenticating user: Error: Invalid email or password","service":"acquisitions-api"}
+{"level":"error","message":"Signin error Invalid email or password","service":"acquisitions-api","stack":"Error: Invalid email or password\n    at authenticateUser (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/services/auth.service.js:30:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async signin (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/controllers/auth.controller.js:59:18)"}
+{"level":"info","message":"::1 - - [21/Sep/2025:11:47:58 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 401 37 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"Error authenticating user: Error: Invalid email or password","service":"acquisitions-api"}
+{"level":"error","message":"Signin error Invalid email or password","service":"acquisitions-api","stack":"Error: Invalid email or password\n    at authenticateUser (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/services/auth.service.js:36:13)\n    at async signin (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/controllers/auth.controller.js:59:18)"}
+{"level":"info","message":"::1 - - [21/Sep/2025:11:50:07 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 401 37 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"Error authenticating user: Error: Invalid email or password","service":"acquisitions-api"}
+{"level":"error","message":"Signin error Invalid email or password","service":"acquisitions-api","stack":"Error: Invalid email or password\n    at authenticateUser (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/services/auth.service.js:36:13)\n    at async signin (file:///C:/Users/Lenovo/Desktop/acquistions/Acquisitions/src/controllers/auth.controller.js:59:18)"}
+{"level":"info","message":"::1 - - [21/Sep/2025:11:54:23 +0000] \"POST /api/auth/sign-in HTTP/1.1\" 401 37 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"User tanzeel01@new.com created successfully","service":"acquisitions-api"}
+{"level":"info","message":"User registered successfully: tanzeel01@new.com","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [21/Sep/2025:11:57:47 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 103 \"-\" \"HTTPie\"","service":"acquisitions-api"}

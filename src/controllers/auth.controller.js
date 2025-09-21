@@ -1,9 +1,9 @@
 import logger from '#config/logger.js';
 import { formatValidationError } from '#utils/format.js';
-import { signupSchema } from '#validations/auth.validations.js';
+import { signupSchema, signinSchema } from '#validations/auth.validations.js';
 import { cookies } from '#utils/cookies.js';
 import { jwttoken } from '#utils/jwt.js';
-import { createUser } from '#services/auth.service.js';
+import { createUser, authenticateUser } from '#services/auth.service.js';
 
 export const signup = async (req, res, next) => {
   try {
@@ -39,5 +39,61 @@ export const signup = async (req, res, next) => {
       return res.status(409).json({ error: 'Email already exists'});
     }
     next(e);  // Pass the error to the next middleware
+  }
+};
+
+export const signin = async (req, res, next) => {
+  try {
+    const validationResult = signinSchema.safeParse(req.body);
+
+    if (!validationResult.success) {
+      return res.status(400).json({
+        errors: 'Validation Failed',
+        details: formatValidationError(validationResult.error)
+      });
+    }
+
+    const { email, password } = validationResult.data;
+
+    // Authenticate user
+    const user = await authenticateUser({ email, password });
+
+    const token = jwttoken.sign({ id: user.id, email: user.email, role: user.role });
+
+    cookies.set(res, 'token', token);
+
+    logger.info(`User signed in successfully: ${email}`);
+    res.status(200).json({
+      message: 'User signed in successfully',
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+
+  } catch (e) {
+    logger.error('Signin error', e);
+
+    if (e.message === 'Invalid email or password') {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    next(e); // Pass the error to the next middleware
+  }
+};
+
+export const signout = async (req, res, next) => {
+  try {
+    cookies.clear(res, 'token');
+
+    logger.info('User signed out successfully');
+    res.status(200).json({
+      message: 'User signed out successfully'
+    });
+
+  } catch (e) {
+    logger.error('Signout error', e);
+    next(e); // Pass the error to the next middleware
   }
 };
